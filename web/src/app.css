@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body {
   height: 100vh;
   user-select: none;
@@ -8,22 +14,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-#root {
+#app {
   height: 100%;
-}
-
-.boilerplate-wrapper {
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  /* padding: 16px; */
-  flex-direction: column;
-  /* background-color: #22232c; */
-}
-
-.boilerplate-modal-container {
-  background-color: #22232c;
-  padding: 16px;
-  color: white;
 }

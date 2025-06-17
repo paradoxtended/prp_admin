@@ -1,8 +1,9 @@
 {
   "compilerOptions": {
-    "module": "es2022",
-    "target": "es2022",
-    "lib": ["es2022"],
+    "jsx": "react",
+    "module": "esnext",
+    "target": "es2023",
+    "lib": ["es2023"],
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "allowUnreachableCode": false,
@@ -11,7 +12,12 @@
     "noImplicitAny": true,
     "noImplicitThis": true,
     "noUnusedLocals": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "paths": {
+      "~/*": ["./*"],
+      "@static/*": ["./static/*"],
+      "@common/*": ["./src/common/*"]
+    },
   },
   "include": ["./src", "./web"]
 }

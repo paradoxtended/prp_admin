@@ -1,0 +1,1 @@
+declare type NuiCb = (value: unknown) => void;

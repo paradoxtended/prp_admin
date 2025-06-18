@@ -8,6 +8,6 @@ if (Config.EnableNuiCommand) {
   addCommand('openNui', async (playerId) => {
     if (!playerId) return;
 
-    emitNet(`${cache.resource}:openNui`, playerId);
+    emitNet(`${cache.resource}:openMenu`, playerId);
   });
 }

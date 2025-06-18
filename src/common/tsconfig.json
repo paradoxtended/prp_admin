@@ -6,7 +6,7 @@
       "~/*": ["../../*"],
       "@common/*": ["../common/*"]
     },
-    "types": ["@types/node", "@citizenfx/server", "@citizenfx/client"]
+    "types": ["@types/node", "@citizenfx/server", "@citizenfx/client", "../../types.d.ts"]
   },
   "include": ["./"]
 }

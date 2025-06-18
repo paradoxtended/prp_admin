@@ -39,6 +39,7 @@
 	},
 	"dependencies": {
 		"@biomejs/biome": "^1.9.4",
+		"@iconify/svelte": "^5.0.0",
 		"@nativewrappers/fivem": "latest",
 		"@overextended/ox_lib": "latest",
 		"@sveltejs/kit": "^2.21.5",
@@ -49,6 +50,7 @@
 		"react-dom": "^18.3.1",
 		"svelte": "^5.34.4",
 		"svelte-check": "^4.2.1",
+		"tailwind-merge": "^3.3.1",
 		"tailwindcss-animate": "^1.0.7",
 		"vite-plugin-svelte-monorepo": "github:sveltejs/vite-plugin-svelte"
 	}

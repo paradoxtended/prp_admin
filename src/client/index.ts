@@ -5,7 +5,7 @@ import { cache } from '@overextended/ox_lib/client';
 Greetings();
 
 if (Config.EnableNuiCommand) {
-  onNet(`${cache.resource}:openNui`, () => {
+  onNet(`${cache.resource}:openMenu`, () => {
     SetNuiFocus(true, true);
 
     SendNUIMessage({

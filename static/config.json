@@ -1,0 +1,17 @@
+{
+    "Command": {
+        "Command": "admin",
+        "Description": "Open up an admin menu.",
+        "EnableKeys": [
+            212
+        ],
+        "AdminGroups": {
+            "admin": {
+                "label": "Admin"
+            },
+            "mod": {
+                "label": "Moderator"
+            }
+        }
+    }
+}

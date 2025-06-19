@@ -33,3 +33,12 @@ body {
     opacity: 0;
   }
 }
+
+::-webkit-scrollbar {
+  width: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #84cc16;
+  border-radius: 25px;
+}

@@ -10,14 +10,32 @@ let visible = $state(false);
 let admin = $state<AdminData>({
   nickname: '',
   role: ''
-})
+});
 
 debugData<AdminData>([
   {
     action: 'openMenu',
     data: {
       nickname: 'Linden',
-      role: 'admin'
+      role: 'developer',
+      online: [
+        {
+          nickname: 'LukeWasTaken',
+          role: 'developer'
+        },
+        {
+          nickname: 'Tom Osborne',
+          role: 'admin'
+        },
+        {
+          nickname: 'ESK0',
+          role: 'mod'
+        },
+        {
+          nickname: 'Nikoleta',
+          role: 'head admin'
+        }
+      ]
     }
   }
 ]);

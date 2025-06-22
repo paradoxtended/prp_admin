@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Navbar from './components/Navbar';
 import useNuiEvent from './hooks/useNuiEvent';
 import { Locale } from './store/locale';
-import { AdminMenu } from './typings/adminMenu';
+import { type AdminMenu } from './typings/adminMenu';
 import { debugData } from './utils/debugData';
 import { fetchNui } from './utils/fetchNui';
 
@@ -16,13 +16,7 @@ debugData<AdminMenu>([
         medical: 5,
         police: 17,
       },
-      admins: [
-        { name: 'Zephyrbell', role: 'admin' },
-        { name: 'Ravage', role: 'admin' },
-        { name: 'Cheddar', role: 'admin' },
-        { name: 'Taire', role: 'admin' },
-        { name: 'kylend', role: 'admin' },
-      ],
+      admins: [{ name: 'Ravage', role: 'admin' }],
       dashboard: [
         { time: '11:00AM', players: 120 },
         { time: '11:05AM', players: 125 },
@@ -59,12 +53,33 @@ const App: React.FC = () => {
     setVisible(true);
   });
 
+  const handleClose = () => {
+    fetchNui('closeAdminMenu');
+    setVisible(false);
+  };
+
+  // Hides the context menu on ESC
+  useEffect(() => {
+    if (!visible) return;
+
+    const keyHandler = (e: KeyboardEvent) => {
+      if (['Escape'].includes(e.code)) handleClose();
+    };
+
+    window.addEventListener('keydown', keyHandler);
+
+    return () => window.removeEventListener('keydown', keyHandler);
+  }, [visible]);
+
   return (
     visible && (
-      <div className="w-3/5 h-2/3 bg-gradient-to-r from-black/90 to-lime-950/90 border-2 border-neutral-500 rounded-md absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+      <div className="w-3/5 h-2/3 bg-gradient-to-r from-black to-[#111f03] border-2 border-neutral-500 rounded-md absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
         <div className="flex items-center justify-between py-5 px-10">
-          <img src="./public/logo.webp" className="w-56" />
-          <i className="fa-regular fa-circle-xmark text-white text-lg cursor-pointer duration-200 hover:text-lime-500"></i>
+          <img src="./logo.png" className="w-56" />
+          <i
+            className="fa-regular fa-circle-xmark text-white text-lg cursor-pointer duration-200 hover:text-lime-500"
+            onClick={() => handleClose()}
+          ></i>
         </div>
         <Navbar props={props} />
       </div>

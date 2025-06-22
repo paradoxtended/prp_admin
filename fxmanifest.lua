@@ -17,6 +17,26 @@ dependencies {
 
 shared_scripts {
     '@ox_lib/init.lua',
-    'static/config.json'
+    '@prp_lib/init.lua'
 }
+
 ui_page 'web/build/index.html'
+
+client_scripts {
+    'init.lua',
+    'src/client/*.lua'
+}
+
+server_scripts {
+    '@oxmysql/lib/MySQL.lua',
+    'init.lua',
+    'src/server/*.lua'
+}
+
+files {
+    'static/config.json',
+    'web/build/index.html',
+    'web/build/assets/*.js',
+    'web/build/assets/*.css',
+    'locales/*.json'
+}

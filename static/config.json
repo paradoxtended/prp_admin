@@ -4,8 +4,8 @@
         "EnableKeys": [
             212
         ],
-        "AllowedGroups": [
-            "admin", "mod", "god"
-        ]
+        "AllowedGroups": {
+            "admin": true, "mod": true, "god": true
+        }
     }
 }

@@ -5,13 +5,12 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
   plugins: [react()],
   base: './',
-  publicDir: false,
+  server: {
+    port: 3000,
+  },
   build: {
     outDir: 'build',
     target: 'esnext',
-  },
-  define: {
-    'process.env': {},
   },
   esbuild: {
     logOverride: { 'this-is-undefined-in-esm': 'silent' },

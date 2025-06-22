@@ -1,5 +1,5 @@
 import { Locale } from '../store/locale';
-import { AdminMenu } from '../typings/adminMenu';
+import { type AdminMenu } from '../typings/adminMenu';
 import DashboardChart from './DashboardChart';
 
 const Dashboard: React.FC<{
@@ -7,7 +7,7 @@ const Dashboard: React.FC<{
   allPlayers: Function;
 }> = ({ props, allPlayers }) => {
   return (
-    <div className="flex flex-col gap-3 pr-10">
+    <div className="flex flex-col gap-3 pr-10 h-full">
       <div className="text-white h-1/2 flex gap-3">
         <div className="bg-neutral-900 w-2/3 p-5 rounded-lg border border-neutral-700 h-fit">
           <div className="flex items-center justify-between">
@@ -38,7 +38,7 @@ const Dashboard: React.FC<{
             </button>
           </div>
         </div>
-        <div className="bg-neutral-900 w-1/3 p-5 pr-0 h-full rounded-lg border border-neutral-700">
+        <div className="bg-neutral-900 w-1/3 p-5 pr-0 rounded-lg border border-neutral-700">
           <div className="flex items-center justify-between pr-5">
             <p className="font-semibold">{Locale.admins_online || 'Admins Online'}</p>
             <p className="text-lime-500 font-bold text-xl">{props.admins.length}</p>
@@ -47,9 +47,9 @@ const Dashboard: React.FC<{
             {props.admins.map((admin, index) => (
               <div
                 key={`admin-${index}`}
-                className="bg-neutral-800 border border-neutral-700 rounded-md py-1.5 px-2 text-sm flex items-center justify-between"
+                className="bg-neutral-800 border border-neutral-700 rounded-md py-1.5 px-2 text-sm flex items-center justify-between cursor-pointer group"
               >
-                <p>{admin.name}</p>
+                <p className="group-hover:text-lime-500 duration-200">{admin.name}</p>
                 <p className="bg-lime-900/70 border border-lime-500 rounded-lg px-1.5 py-0.5 text-[12px]">
                   {admin.label || admin.role.charAt(0).toUpperCase() + admin.role.slice(1)}
                 </p>

@@ -1,7 +1,8 @@
 $mainColor: #1eeec4;
-$bgColor: #226061;
+$bgColor: #1d5253;
 
 .categories {
+    position: relative;
     font-family: Poppins;
     display: flex;
 }
@@ -12,24 +13,33 @@ $bgColor: #226061;
     color: #bebebe;
     font-weight: 300;
     cursor: pointer;
+    position: relative;
+    user-select: none;
+    z-index: 2;
+    transition: color 0.3s ease;
 }
 
 .categories p.active {
     color: $mainColor;
-    background-color: $bgColor;
-    position: relative;
-    transition: all 100ms;
 }
 
-.categories p.active::after {
-    content: '';
+.slider {
+    position: absolute;
+    bottom: -70%;
     height: 3px;
     background: $mainColor;
-    position: absolute;
-    left: 50%;
-    bottom: -70%;
-    transform: translateX(-50%);
-    width: 100%;
-    z-index: 1;
     filter: drop-shadow(0 0 5px $mainColor);
+    transition: transform 0.3s ease, width 0.3s ease;
+    border-radius: 2px;
+    z-index: 1;
+}
+
+.bg-slider {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background-color: $bgColor;
+    transition: transform 0.3s ease, width 0.3s ease;
+    z-index: 1;
 }

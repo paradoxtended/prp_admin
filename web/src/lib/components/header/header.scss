@@ -1,0 +1,104 @@
+$mainColor: #1eeec4;
+
+.header {
+    padding: 50px;
+    font-family: Poppins;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header::after {
+    content: '';
+    height: 1px;
+    background: linear-gradient(
+        to right,
+        transparent,
+        #bebebe,
+        transparent
+    );
+    position: absolute;
+    bottom: 25%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+}
+
+.header .info {
+    display: flex;
+    flex-direction: column;
+    line-height: 20px;
+    position: relative;
+    width: fit-content;
+}
+
+.header .info::after {
+    content: '';
+    height: 3px;
+    background: $mainColor;
+    position: absolute;
+    left: 50%;
+    bottom: -40%;
+    transform: translateX(-50%);
+    width: 100%;
+    z-index: 1;
+    filter: drop-shadow(0 0 5px $mainColor);
+}
+
+.header .info .title {
+    color: $mainColor;
+    font-size: 20px;
+    font-weight: 500;
+    filter: drop-shadow(0 0 15px $mainColor);
+}
+
+.header .info .description {
+    color: #bebebe;
+    font-weight: 300;
+    font-size: 14px;
+}
+
+.header .input-wrapper {
+    position: relative;
+}
+
+.header .input-wrapper input {
+    background: radial-gradient(#54575f, #474a52);
+    border: 1px solid #6b7280;
+    font-size: 12px;
+    padding: 7px 12px;
+    color: #b4b4b4;
+    border-radius: 2px;
+    width: 220px;
+}
+
+.header .input-wrapper input::placeholder {
+    color: #83858d;
+}
+
+.header .input-wrapper i {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 13px;
+    color: #83858d;
+}
+
+.header .exit-wrapper {
+    display: flex;
+    font-size: 13px;
+    color: #bebebe;
+    background-color: #52525ba5;
+    padding: 1px;
+    border-radius: 2px;
+}
+
+.header .exit-wrapper p {
+    padding: 2px 12px;
+}
+
+.header .exit-wrapper p.exit {
+    background-color: #1f2937c0;
+}

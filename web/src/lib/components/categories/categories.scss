@@ -1,0 +1,35 @@
+$mainColor: #1eeec4;
+$bgColor: #226061;
+
+.categories {
+    font-family: Poppins;
+    display: flex;
+}
+
+.categories p {
+    font-size: 13px;
+    padding: 5px 17px;
+    color: #bebebe;
+    font-weight: 300;
+    cursor: pointer;
+}
+
+.categories p.active {
+    color: $mainColor;
+    background-color: $bgColor;
+    position: relative;
+    transition: all 100ms;
+}
+
+.categories p.active::after {
+    content: '';
+    height: 3px;
+    background: $mainColor;
+    position: absolute;
+    left: 50%;
+    bottom: -70%;
+    transform: translateX(-50%);
+    width: 100%;
+    z-index: 1;
+    filter: drop-shadow(0 0 5px $mainColor);
+}

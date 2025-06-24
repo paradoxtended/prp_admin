@@ -57,3 +57,21 @@ input {
 input:focus {
   outline: none;
 }
+
+main {
+  display: flex;
+  height: calc($containerSizeY - 200px);
+}
+
+::-webkit-scrollbar {
+  width: 2px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #b6b6b6;
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #747474;
+}

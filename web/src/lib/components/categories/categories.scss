@@ -1,5 +1,5 @@
 $mainColor: #1eeec4;
-$bgColor: #1d5253;
+$bgColor: #226b5ea0;
 
 .categories {
     position: relative;
@@ -42,4 +42,5 @@ $bgColor: #1d5253;
     background-color: $bgColor;
     transition: transform 0.3s ease, width 0.3s ease;
     z-index: 1;
+    border-radius: 2px;
 }

@@ -1,11 +1,14 @@
 <script lang="ts">
+import Commands from '$lib/components/commands/Commands.svelte';
 import Header from '$lib/components/header/Header.svelte';
+import Section from '$lib/components/sections/Section.svelte';
 import { useNuiEvent } from '$lib/hooks/useNuiEvent';
 import { Locale } from '$lib/store/locale';
-    import { fetchNui } from '$lib/utils/fetchNui';
+import { fetchNui } from '$lib/utils/fetchNui';
 import { isEnvBrowser } from '$lib/utils/misc';
 
 let visible = $state(isEnvBrowser());
+let section = $state('commands');
 
 $effect(() => {
   if (visible) return;
@@ -33,5 +36,11 @@ fetchNui('uiLoaded', {});
 {#if visible}
   <div class="container">
     <Header />
+    <main>
+      <Section setSection={(name: string) => section = name} />
+      {#if section === 'commands'}
+        <Commands />
+      {/if}
+    </main>
   </div>
 {/if}

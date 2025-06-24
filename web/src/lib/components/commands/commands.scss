@@ -1,0 +1,86 @@
+$mainColor: #1eeec4;
+$bgColor: #278675a0;
+$mainColorHover: #2abea3;
+$bgColorHover: #19473fa0;
+
+.commands {
+    font-family: Poppins;
+    padding-left: 15px;
+    width: 100%;
+    margin-right: 30px;
+    padding-right: 20px;
+}
+
+.command {
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    border-radius: 3px;
+}
+
+.command .cmd-header {
+    background: radial-gradient(#666870a0, #454752a0);
+    color: #fff;
+    padding: 10px;
+    font-weight: 300;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.command .cmd-header:hover {
+    background: linear-gradient($mainColorHover, $bgColor);
+}
+
+.command .cmd-header:hover .leftSide i {
+    background-color: $bgColorHover;
+}
+
+.command .cmd-header:hover .expand {
+    background-color: $bgColorHover;
+}
+
+.command .leftSide {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.command .leftSide i {
+    z-index: 10;
+    width: 30px;
+    height: 30px;
+    background-color: #5a6370;
+    display: flex;
+    justify-content: center; align-items: center;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.command .expand {
+    font-size: 10px;
+    color: $mainColor;
+    background-color: $bgColor;
+    width: 20px;
+    height: 20px;
+    border-radius: 2px;
+    display: flex;
+    justify-content: center; align-items: center;
+}
+
+.command .command-button {
+    width: fit-content;
+    padding: 5px 12px;
+    background-color: #1e695ca0;
+    color: $mainColor;
+    font-family: Poppins;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.command .command-button:hover {
+    background-color: $bgColor;
+}

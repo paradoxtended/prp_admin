@@ -1,3 +1,11 @@
 {
-  "EnableNuiCommand": true
+  "Panel": {
+    "Command": "menu",
+    "EnableKeys": [
+      212
+    ],
+    "AllowedGroups": [
+      "admin"
+    ]
+  }
 }

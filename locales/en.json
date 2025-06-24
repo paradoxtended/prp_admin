@@ -1,4 +1,5 @@
 {
-  "hello": "hello ${world}",
-  "world": "world"
+  "admin_panel_help": "Opens up an admin panel.",
+  "bring": "%s has been brought to you.",
+  "something_went_wrong": "Something went wrong."
 }

@@ -12,9 +12,9 @@ $bgColorHover: #19473fa0;
 }
 
 .command {
+    border-radius: 3px;
     overflow: hidden;
     transition: max-height 0.3s ease;
-    border-radius: 3px;
 }
 
 .command .cmd-header {

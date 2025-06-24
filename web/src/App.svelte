@@ -4,11 +4,13 @@ import Header from '$lib/components/header/Header.svelte';
 import Section from '$lib/components/sections/Section.svelte';
 import { useNuiEvent } from '$lib/hooks/useNuiEvent';
 import { Locale } from '$lib/store/locale';
+import { Player } from '$lib/typings/player';
 import { fetchNui } from '$lib/utils/fetchNui';
 import { isEnvBrowser } from '$lib/utils/misc';
 
 let visible = $state(isEnvBrowser());
 let section = $state('commands');
+let Players = $state<Player[] | null>();
 
 $effect(() => {
   if (visible) return;
@@ -31,6 +33,24 @@ useNuiEvent<{
 });
 
 fetchNui('uiLoaded', {});
+
+useNuiEvent('openAdminPanel', (data: { players: Player[] }) => {
+  Players = data.players;
+  visible = true;
+});
+
+$effect(() => {
+  const handleKeyDown = (e: any) => {
+    if (e.key === "Escape") 
+      {
+        visible = false;
+        fetchNui('closeAdminPanel');
+      }
+  };
+  window.addEventListener("keydown", handleKeyDown);
+
+  return () => window.removeEventListener("keydown", handleKeyDown);
+});
 </script>
 
 {#if visible}
@@ -39,7 +59,7 @@ fetchNui('uiLoaded', {});
     <main>
       <Section setSection={(name: string) => section = name} />
       {#if section === 'commands'}
-        <Commands />
+        <Commands players={Players} />
       {/if}
     </main>
   </div>

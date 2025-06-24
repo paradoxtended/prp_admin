@@ -4,39 +4,36 @@ import Select from 'svelte-select';
 import type { Command } from '$lib/typings/command';
 import '../commands.scss';
 import './bring.scss';
+    import { fetchNui } from '$lib/utils/fetchNui';
 
-const { name, label, favorite, expandable, boundedTo, setFavorite }: Command = $props();
+const { name, label, favorite, expandable, boundedTo, setFavorite, players }: Command = $props();
 
 let expanded = $state(false);
+let allowOverflow = $state(false);
 
-let selected = $state(null);
+$effect(() => {
+    if (expanded) {
+        setTimeout(() => allowOverflow = true, 300);
+    } else {
+        allowOverflow = false;
+    }
+});
+
+let selectedPlayer = $state(null);
 // @todo fetch players from the server
-const options = [
-    { label: '(357) koil [STEAM: 015478856]', value: 357 },
-    { label: '(142) buddha [STEAM: 1234534]', value: 142 },
-    { label: '(15) xqc [STEAM: 1231385745634]', value: 15 },
-    { label: '(678) saab [STEAM: 123874534]', value: 678 },
-    { label: '(154) np [STEAM: 1238575364]', value: 154 },
-    { label: '(154) np [STEAM: 1238575364]', value: 154 },
-    { label: '(154) np [STEAM: 1238575364]', value: 154 },
-    { label: '(154) np [STEAM: 1238575364]', value: 154 },
-    { label: '(154) np [STEAM: 1238575364]', value: 154 },
-    { label: '(154) np [STEAM: 1238575364]', value: 154 },
-    { label: '(154) np [STEAM: 1238575364]', value: 154 },
-    { label: '(154) np [STEAM: 1238575364]', value: 154 },
-    { label: '(154) np [STEAM: 1238575364]', value: 154 },
-];
-
-let floatingConfig = {
-    strategy: 'fixed'
-};
+const options = players.map(ply => {
+    return {
+        label: `(${ply.id}) ${ply.name} [${ply.steamId}]`,
+        value: ply.id
+    }
+});
 
 function bringPlayer() {
-    console.log(selected.value)
+    fetchNui('bring', selectedPlayer?.value);
 };
 </script>
 
-<div class="command" style={`max-height: ${expanded ? '200px' : '50px'}`}>
+<div class="command" style={`max-height: ${expanded ? '200px' : '50px'}; ${allowOverflow && 'overflow: visible'}`}>
     <div class="cmd-header" onclick={() => expanded = !expanded}>
         <div class="leftSide">
             <i class="fa-solid fa-star" style={`opacity: ${favorite ? 1 : 0.4}`}
@@ -54,11 +51,9 @@ function bringPlayer() {
     <div class="bring-main">
         <p class="bring-label">{Locale.target || 'Target'}</p>
         <Select
-            {floatingConfig}
-            bind:value={selected}
+            bind:value={selectedPlayer}
             items={options}
             placeholder={Locale.select_player || 'Select Player'}
-            class="bring-input"
             --background = "radial-gradient(#71717a, #52525b)"
             --border = '1px solid #656a74'
             --border-focused = '1px solid #656a74'

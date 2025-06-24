@@ -29,15 +29,17 @@
 		"@types/react": "^18.3.18",
 		"@types/react-dom": "^18.3.5",
 		"@vitejs/plugin-react": "^4.3.4",
-		"esbuild": "^0.25.0",
+		"esbuild": "^0.25.5",
 		"sass-embedded": "^1.89.2",
 		"typescript": "^5.8.2",
 		"vite": "^6.3.5"
 	},
 	"dependencies": {
 		"@biomejs/biome": "^1.9.4",
-		"@nativewrappers/fivem": "latest",
-		"@overextended/ox_lib": "latest",
+		"@nativewrappers/common": "^0.0.104",
+		"@nativewrappers/fivem": "^0.0.104",
+		"@nativewrappers/server": "^0.0.104",
+		"@overextended/ox_lib": "^3.30.6",
 		"@sveltejs/vite-plugin-svelte": "^5.1.0",
 		"@tsconfig/svelte": "^5.0.4",
 		"react": "^18.3.1",
@@ -46,6 +48,7 @@
 		"svelte": "^5.34.7",
 		"svelte-check": "^4.2.2",
 		"svelte-select": "^5.8.3",
+		"sync-fetch": "^0.6.0-2",
 		"typescript-eslint": "^8.34.1"
 	}
 }

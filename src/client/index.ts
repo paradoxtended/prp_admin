@@ -1,23 +1,19 @@
-import Config from '@common/config';
-import { Greetings } from '@common/index';
+import './commands/index';
 import { cache } from '@overextended/ox_lib/client';
+import './bridge/init';
 
-Greetings();
+onNet(`${cache.resource}:openAdminPanel`, (players: { name: string; id: string; steamId: string }[]) => {
+  SetNuiFocus(true, true);
 
-if (Config.EnableNuiCommand) {
-  onNet(`${cache.resource}:openNui`, () => {
-    SetNuiFocus(true, true);
-
-    SendNUIMessage({
-      action: 'setVisible',
-      data: {
-        visible: true,
-      },
-    });
+  SendNUIMessage({
+    action: 'openAdminPanel',
+    data: {
+      players: players,
+    },
   });
+});
 
-  RegisterNuiCallback('exit', (data: null, cb: (data: unknown) => void) => {
-    SetNuiFocus(false, false);
-    cb({});
-  });
-}
+RegisterNuiCallback('closeAdminPanel', (data: null, cb: (data: unknown) => void) => {
+  SetNuiFocus(false, false);
+  cb({});
+});

@@ -1,13 +1,33 @@
+import Locale from 'locale';
 import Config from '@common/config';
-import { Greetings } from '@common/index';
 import { addCommand, cache } from '@overextended/ox_lib/server';
+import './bridge/init';
+import './commands/index';
+import { IsPlayerAllowed } from './utils';
 
-Greetings();
+if (Config.Panel.Command) {
+  addCommand(
+    Config.Panel.Command,
+    async (playerId) => {
+      if (!playerId || !IsPlayerAllowed(playerId)) return;
 
-if (Config.EnableNuiCommand) {
-  addCommand('openNui', async (playerId) => {
-    if (!playerId) return;
+      let players: Player[] = [];
 
-    emitNet(`${cache.resource}:openNui`, playerId);
-  });
+      getPlayers().map((playerId) => {
+        players.push({
+          name: GetPlayerName(playerId),
+          id: playerId,
+          steamId:
+            getPlayerIdentifiers(playerId).find((id) => id.includes('steam')) ||
+            getPlayerIdentifiers(playerId).find((id) => id.includes('fivem')),
+        });
+      });
+
+      emitNet(`${cache.resource}:openAdminPanel`, playerId, players);
+    },
+    {
+      help: Locale('admin_panel_help'),
+      restricted: Config.Panel.AllowedGroups,
+    },
+  );
 }

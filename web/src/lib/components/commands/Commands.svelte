@@ -28,13 +28,15 @@ function setFavorite(name: string, fav: boolean) {
       c.name === name ? { ...c, favorite: fav } : c
     );
 };
+
+const { players } = $props();
 </script>
 
 <div class="commands">
     {#each commands as cmd}
         {#if loadedComponents[cmd.name]}
             <!-- svelte-ignore svelte_component_deprecated -->
-            <svelte:component this={loadedComponents[cmd.name]} {...cmd} setFavorite={setFavorite} />
+            <svelte:component this={loadedComponents[cmd.name]} {...cmd} setFavorite={setFavorite} players={players} />
         {/if}
     {/each}
 </div>

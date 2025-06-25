@@ -2,6 +2,8 @@
 import { Locale } from '$lib/store/locale';
 import './categories.scss';
 
+const { category } = $props();
+
 interface Category {
     name: string;
     label?: string;
@@ -21,6 +23,7 @@ let sliderEl: HTMLElement;
 
 function setActive(name: string) {
     categories = categories.map(c => ({ ...c, active: c.name === name }));
+    category(categories.find(c => c.active).name);
 };
 
 function updateSlider() {

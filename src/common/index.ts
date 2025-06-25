@@ -1,4 +1,22 @@
-import Locale from 'locale';
-import { ResourceContext } from './resource';
+declare const window: {
+  GetParentResourceName: () => string;
+};
 
-export function Greetings() {}
+/**
+ * Determine if the script is running in CEF, a browser, or neither.
+ * @returns {number}
+ *          0 - runnning on the client or server
+ *
+ *          1 - running in CEF
+ *
+ *          2 - running in a browser
+ */
+export const isBrowser =
+  typeof window === 'undefined' ? 0 : typeof window.GetParentResourceName !== 'undefined' ? 1 : 2;
+
+export const resourceContext = isBrowser ? 'web' : IsDuplicityVersion() ? 'server' : 'client';
+export const resourceName = isBrowser
+  ? window.GetParentResourceName
+    ? window.GetParentResourceName()
+    : 'nui-frame-app'
+  : (GetCurrentResourceName() ?? 'np-admin');

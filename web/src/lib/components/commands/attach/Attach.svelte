@@ -6,7 +6,7 @@ import '../commands.scss';
 import { fetchNui } from '$lib/utils/fetchNui';
 import { isEnvBrowser } from '$lib/utils/misc';
 
-const { name, label, favorite, expandable, boundedTo, setFavorite, players }: Command = $props();
+const { name, label, favorite, setFavorite, players }: Command = $props();
 
 let expanded = $state(false);
 let allowOverflow = $state(false);
@@ -34,8 +34,8 @@ const options = isEnvBrowser() ? [
     }
 });
 
-function bringPlayer() {
-    fetchNui('bring', selectedPlayer?.value);
+function attachToPlayer() {
+    fetchNui('attach', selectedPlayer?.value);
 };
 </script>
 
@@ -46,12 +46,8 @@ function bringPlayer() {
             onclick={(e) => { e.stopPropagation(); setFavorite(name, !favorite); }}></i>
             <p>{label}</p>
         </div>
-        <div class={`${expandable ? 'expand' : 'static'}`}>
-            {#if expandable}
-                <i class={`${expanded ? 'fa-solid fa-chevron-up' : 'fa-solid fa-chevron-down'}`}></i>
-            {:else}
-                <p>{Locale.bound_to || 'Bound To'}: <span>{boundedTo}</span></p>
-            {/if}
+        <div class="expand">
+            <i class={`${expanded ? 'fa-solid fa-chevron-up' : 'fa-solid fa-chevron-down'}`}></i>
         </div>
     </div>
     <div class="command-main">
@@ -82,6 +78,6 @@ function bringPlayer() {
             --list-z-index = '10'
             --list-max-height = '200px'
         />
-        <button onclick={() => bringPlayer()} class="command-button">{label}</button>
+        <button onclick={() => attachToPlayer()} class="command-button">{label}</button>
     </div>
 </div>

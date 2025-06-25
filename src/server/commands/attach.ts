@@ -3,7 +3,7 @@ import { onClientCallback } from '@overextended/ox_lib/server';
 import { IsPlayerAllowed } from '../utils';
 import Framework from '../bridge/init';
 
-onClientCallback('np-admin:bring', async (playerId: any, targetId: number) => {
+onClientCallback('np-admin:attach', async (playerId: any, targetId: number) => {
   const allowed = IsPlayerAllowed(playerId);
 
   if (!allowed) return false;
@@ -18,9 +18,9 @@ onClientCallback('np-admin:bring', async (playerId: any, targetId: number) => {
 
   if (!target || !player) return false;
 
-  const coords = Vector3.fromArray(GetEntityCoords(peds.admin));
+  const coords = Vector3.fromArray(GetEntityCoords(peds.target));
 
-  SetEntityCoords(peds.target, coords.x, coords.y, coords.z, true, false, true, false);
+  SetEntityCoords(peds.admin, coords.x, coords.y, coords.z, true, false, true, false);
 
   return GetPlayerName(target.source);
 });

@@ -11,10 +11,8 @@ import { isEnvBrowser } from '$lib/utils/misc';
 let visible = $state(isEnvBrowser());
 let section = $state('commands');
 let Players = $state<Player[] | null>();
-
-$effect(() => {
-  if (visible) return;
-});
+let category = $state<string>('all');
+let searchQuery = $state<string>('');
 
 if (isEnvBrowser()) {
   const root = document.getElementById('app');
@@ -24,8 +22,9 @@ if (isEnvBrowser()) {
   root!.style.backgroundSize = 'cover';
   root!.style.backgroundRepeat = 'no-repeat';
   root!.style.backgroundPosition = 'center';
-}
+};
 
+/*
 useNuiEvent<{
   locale: { [key: string]: string }
 }>('init', ({ locale }) => {
@@ -33,33 +32,34 @@ useNuiEvent<{
 });
 
 fetchNui('uiLoaded', {});
+*/
 
 useNuiEvent('openAdminPanel', (data: { players: Player[] }) => {
   Players = data.players;
   visible = true;
 });
 
-$effect(() => {
-  const handleKeyDown = (e: any) => {
-    if (e.key === "Escape") 
-      {
-        visible = false;
-        fetchNui('closeAdminPanel');
-      }
-  };
-  window.addEventListener("keydown", handleKeyDown);
+function onKeyDown(event: KeyboardEvent) {
+  const key = event.key.toLowerCase();
 
-  return () => window.removeEventListener("keydown", handleKeyDown);
-});
+  switch (key) {
+    case 'escape': {
+      visible = false;
+      fetchNui('closeAdminPanel');
+    }
+  }
+}
 </script>
+
+<svelte:window onkeydown={onKeyDown} />
 
 {#if visible}
   <div class="container">
-    <Header />
+    <Header category={(cat: string) => category = cat} searchQuery={(query: string) => searchQuery = query} />
     <main>
       <Section setSection={(name: string) => section = name} />
       {#if section === 'commands'}
-        <Commands players={Players} />
+        <Commands players={Players} category={category} searchQuery={searchQuery} />
       {/if}
     </main>
   </div>

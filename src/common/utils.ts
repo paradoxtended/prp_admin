@@ -1,11 +1,11 @@
-import { ResourceName, IsBrowser } from './resource';
+import { isBrowser, resourceName } from './';
 
 export function LoadFile(path: string) {
-  return LoadResourceFile(ResourceName, path);
+  return LoadResourceFile(resourceName, path);
 }
 
 export function LoadJsonFile<T = unknown>(path: string): T {
-  if (!IsBrowser) return JSON.parse(LoadFile(path)) as T;
+  if (!isBrowser) return JSON.parse(LoadFile(path)) as T;
 
   const resp = fetch(`/${path}`, {
     method: 'post',
@@ -15,4 +15,8 @@ export function LoadJsonFile<T = unknown>(path: string): T {
   });
 
   return resp.then((response) => response.json()) as T;
+}
+
+export function ClearObject(obj: Record<string, any>) {
+  Object.keys(obj).forEach((key) => delete obj[key]);
 }

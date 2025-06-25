@@ -4,6 +4,7 @@ import { addCommand, cache } from '@overextended/ox_lib/server';
 import './bridge/init';
 import './commands/index';
 import { IsPlayerAllowed } from './utils';
+import './favoriteCmd';
 
 if (Config.Panel.Command) {
   addCommand(
@@ -30,4 +31,4 @@ if (Config.Panel.Command) {
       restricted: Config.Panel.AllowedGroups,
     },
   );
-};
+}

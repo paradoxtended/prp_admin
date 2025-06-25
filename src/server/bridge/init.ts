@@ -4,9 +4,9 @@ import { Framework as QB } from './qb';
 let Framework: SharedObjectServer;
 
 if (GetResourceState('es_extended') === 'started') {
-    Framework = ESX;
+  Framework = ESX;
 } else if (GetResourceState('qb-core') === 'started') {
-    Framework = QB;
-};
+  Framework = QB;
+}
 
 export default Framework;

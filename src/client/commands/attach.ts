@@ -1,16 +1,16 @@
 import lib, { triggerServerCallback } from '@overextended/ox_lib/client';
 import locale from '@common/locale';
 
-RegisterNuiCallback('bring', async (player: string, cb: (data: unknown) => void) => {
+RegisterNuiCallback('attach', async (player: string, cb: (data: unknown) => void) => {
   cb(1);
 
   if (!player) return;
 
-  const response = await triggerServerCallback<string>('np-admin:bring', null, player);
+  const response = await triggerServerCallback<string>('np-admin:attach', null, player);
 
   if (response) {
     lib.notify({
-      description: locale('notifications.bring', response),
+      description: locale('notifications.attach', response),
       type: 'inform',
     });
   } else {

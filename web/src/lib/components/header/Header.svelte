@@ -3,6 +3,7 @@ import { Locale } from "$lib/store/locale";
 import Categories from "../categories/Categories.svelte";
 import './header.scss'
 
+const { category, searchQuery } = $props();
 </script>
 
 <div class="header">
@@ -10,9 +11,9 @@ import './header.scss'
         <p class="title">{Locale.admin_panel || 'Administrator Panel'}</p>
         <p class="description">{Locale.all_commands || 'All Commands'}</p>
     </div>
-    <Categories />
+    <Categories category={category} />
     <div class="input-wrapper">
-        <input type="text" placeholder={Locale.search || 'Search...'}>
+        <input type="text" placeholder={Locale.search || 'Search...'} oninput={(e: Event) => searchQuery((e.target as HTMLInputElement).value)}>
         <i class="fa-solid fa-magnifying-glass"></i>
     </div>
     <div class="exit-wrapper">

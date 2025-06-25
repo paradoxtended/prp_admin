@@ -19,7 +19,8 @@ if (GetResourceState('es_extended') === 'started') {
 
   Framework.getJobGrade = () => sharedObject?.GetPlayerData().job.grade;
 
-  Framework.hasItem = (name: string) => (sharedObject?.GetPlayerData().inventory || []).some((i: any) => i.name === name);
+  Framework.hasItem = (name: string) =>
+    (sharedObject?.GetPlayerData().inventory || []).some((i: any) => i.name === name);
 
   Framework.getIdentifier = () => sharedObject?.GetPlayerData().identifier;
 

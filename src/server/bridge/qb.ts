@@ -93,7 +93,7 @@ if (GetResourceState('qb-core') === 'started') {
 
     getLastName(): string {
       return this.qbPlayer.PlayerData.charinfo.lastname;
-    }
+    },
   };
 
   Framework = {
@@ -144,6 +144,6 @@ if (GetResourceState('qb-core') === 'started') {
         return global.exports['codem-inventory'].GetItemList();
       }
       return sharedObject.Shared.Items;
-    }
+    },
   };
 }

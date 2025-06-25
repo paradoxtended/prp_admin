@@ -89,7 +89,7 @@ if (GetResourceState('es_extended') === 'started') {
 
     getLastName(): string {
       return this.xPlayer.get('lastName');
-    }
+    },
   };
 
   Framework = {
@@ -140,7 +140,7 @@ if (GetResourceState('es_extended') === 'started') {
         return global.exports['codem-inventory'].GetItemList();
       }
       return sharedObject.Items;
-    }
+    },
   };
 
   on('esx:setPlayerData', (key: string, val: any, last: any) => {

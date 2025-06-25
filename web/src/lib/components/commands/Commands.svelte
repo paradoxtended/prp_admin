@@ -18,10 +18,11 @@ async function loadComponents(name: string) {
     }
 };
 
-// svelte-ignore state_referenced_locally
-for (const cmd of commands) {
-    loadComponents(cmd.name);
-};
+$effect(() => {
+    for (const cmd of commands) {
+        loadComponents(cmd.name);
+    };
+})
 
 function setFavorite(name: string, fav: boolean) {
     commands = commands.map(c =>

@@ -1,5 +1,6 @@
 {
   "admin_panel_help": "Opens up an admin panel.",
   "bring": "%s has been brought to you.",
-  "something_went_wrong": "Something went wrong."
+  "something_went_wrong": "Something went wrong.",
+  "wait": "You need to wait a little bit to do it again."
 }

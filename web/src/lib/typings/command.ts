@@ -1,4 +1,4 @@
-import { Player } from './player';
+import { PlayerAdminData } from './player';
 
 export interface Command {
   name: string;
@@ -7,5 +7,5 @@ export interface Command {
   expandable?: boolean;
   boundedTo?: string;
   setFavorite?: (name: string, status: boolean) => void;
-  players?: Player[];
+  players?: PlayerAdminData[];
 }

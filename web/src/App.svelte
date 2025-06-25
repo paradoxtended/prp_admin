@@ -4,7 +4,7 @@ import Header from '$lib/components/header/Header.svelte';
 import Section from '$lib/components/sections/Section.svelte';
 import { useNuiEvent } from '$lib/hooks/useNuiEvent';
 import { Locale } from '$lib/store/locale';
-import { Player } from '$lib/typings/player';
+import type { PlayerAdminData as Player } from '$lib/typings/player';
 import { fetchNui } from '$lib/utils/fetchNui';
 import { isEnvBrowser } from '$lib/utils/misc';
 

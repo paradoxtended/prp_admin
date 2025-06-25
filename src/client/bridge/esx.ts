@@ -1,34 +1,4 @@
-export const Framework: SharedObjectClient = {
-  name: '',
-  object: null,
-  isPlayerLoaded() {
-    return false;
-  },
-  onPlayerLoaded() {
-    return;
-  },
-  onPlayerLogout() {
-    return;
-  },
-  getJob() {
-    return false;
-  },
-  getJobGrade() {
-    return undefined;
-  },
-  hasItem() {
-    return false;
-  },
-  getIdentifier() {
-    return undefined;
-  },
-  getCharacterName() {
-    return '';
-  },
-  getInventory() {
-    return [];
-  },
-};
+export let Framework = {} as SharedObjectClient;
 
 if (GetResourceState('es_extended') === 'started') {
   const sharedObject = global.exports['es_extended'].getSharedObject();

@@ -17,12 +17,22 @@ RegisterNuiCallback('cloak', (_data: unknown, cb?: NuiCb) => {
     SetEveryoneIgnorePlayer(PlayerId(), cloaked);
     SetPoliceIgnorePlayer(PlayerId(), cloaked);
     SetEntityInvincible(cache.ped, cloaked);
+    SetEntityAlpha(cache.ped, cloaked ? 150 : 255, false);
+
+    emitNet(`${cache.resource}:cloak`, cloaked);
 });
 
 setTick(() => {
-    if (cloaked) {
+    if (cloaked)
         SetEntityLocallyVisible(cache.ped);
-        SetEntityAlpha(cache.ped, 155, false);
-    } else 
-        ResetEntityAlpha(cache.ped)
+});
+
+onNet(`${cache.resource}:cloak`, (adminId: number, state: boolean) => {
+    const admin = GetPlayerFromServerId(adminId);
+    const ped = GetPlayerPed(admin);
+
+    const localPlayer = cache.ped === ped;
+
+    if (!localPlayer)
+        SetEntityCollision(ped, !state, !state);
 });

@@ -71,3 +71,16 @@ declare interface SharedObjectServer {
 };
 
 declare type NuiCb = (value: unknown) => void;
+
+declare interface InitializingData { 
+  favorites: string[];
+  activeCommands: Record<string, boolean>;
+};
+
+declare interface Item {
+  stack: boolean;
+  name: string;
+  weight: number;
+  close: boolean;
+  label: string;
+};

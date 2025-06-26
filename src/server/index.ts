@@ -5,6 +5,7 @@ import './bridge/init';
 import './commands/index';
 import { IsPlayerAllowed } from './utils';
 import './favoriteCmd';
+import Framework from './bridge/init';
 
 if (Config.Panel.Command) {
   addCommand(
@@ -32,3 +33,5 @@ if (Config.Panel.Command) {
     },
   );
 };
+
+onNet(`${cache.resource}:fetchItems`, () => emitNet(`${cache.resource}:fetchItems`, source, Framework.getItems()));

@@ -1,3 +1,4 @@
+import { Item } from './item';
 import { PlayerAdminData } from './player';
 
 export interface Command {
@@ -10,4 +11,5 @@ export interface Command {
   active?: boolean;
   setFavorite?: (name: string, status: boolean) => void;
   players?: PlayerAdminData[];
+  items?: Item[];
 }

@@ -106,5 +106,19 @@ $bgColorHover: #19473fa0;
 }
 
 .command-label {
+    font-size: 12px;
+}
+
+.command-main input {
+    background: radial-gradient(#71717a, #52525b);
+    border: 1px solid #656a74;
+    color: #bebebe;
+    border-radius: 2px;
+    width: 250px;
     font-size: 13px;
+    padding: 5px 10px;
+}
+
+.command-main input::placeholder {
+    color: #bebebe;
 }

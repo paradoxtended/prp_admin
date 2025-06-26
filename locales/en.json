@@ -1,8 +1,10 @@
 {
   "notifications": {
      "bring": "%s brought to you.",
-     "attach": "Attached to %s"
+     "attach": "Attached to %s",
+     "spawn_item": "%sx %s gave to %s"
   },
   "admin_panel_help": "Opens up an admin panel.",
-  "something_went_wrong": "Something went wrong."
+  "something_went_wrong": "Something went wrong.",
+  "uiLoaded": "Admin Panel has been loaded."
 }

@@ -1,11 +1,18 @@
 import { cache } from "@overextended/ox_lib/client";
 
-let cloaked: boolean = false;
+export let cloaked: boolean = false;
+let timer: number;
 
 RegisterNuiCallback('cloak', (_data: unknown, cb?: NuiCb) => {
     if (cb) cb(1);
 
     cloaked = !cloaked;
+
+    if (timer) clearTick(timer);
+    
+    if (cloaked) {
+        timer = setTick(() => SetEntityLocallyVisible(cache.ped));
+    };
 
     ClearPedBloodDamage(cache.ped);
     SetPedCanBeTargetted(cache.ped, !cloaked);
@@ -20,11 +27,6 @@ RegisterNuiCallback('cloak', (_data: unknown, cb?: NuiCb) => {
     SetEntityAlpha(cache.ped, cloaked ? 150 : 255, false);
 
     emitNet(`${cache.resource}:cloak`, cloaked);
-});
-
-setTick(() => {
-    if (cloaked)
-        SetEntityLocallyVisible(cache.ped);
 });
 
 onNet(`${cache.resource}:cloak`, (adminId: number, state: boolean) => {

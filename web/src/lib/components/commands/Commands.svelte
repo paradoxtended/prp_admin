@@ -9,7 +9,8 @@ import { onMount } from 'svelte';
 let commands = $state<Command[]>([
     { name: 'bring', label: Locale.bring || 'Bring', category: 'player', expandable: true },
     { name: 'attach', label: Locale.attach || 'Attach', category: 'player', expandable: true },
-    { name: 'cloak', label: Locale.cloak || 'Cloak', category: 'user' }
+    { name: 'cloak', label: Locale.cloak || 'Cloak', category: 'user' },
+    { name: 'spawn_item', label: Locale.spawn_item || 'Spawn Item', category: 'utility', expandable: true }
 ]);
 
 const components = import.meta.glob<{ default: typeof SvelteComponent }>('./**/*.svelte');
@@ -37,10 +38,13 @@ function setFavorite(name: string, fav: boolean) {
 };
 
 onMount(async () => {
-  const favorites = await fetchNui('getFavoritesCmd');
+  const data: {
+    favorites: string[];
+    activeCommands: Record<string, boolean>;
+  } = await fetchNui('initCommands');
 
-  if (favorites) {
-    favorites.map((fav: string) => {
+  if (data.favorites) {
+    data.favorites.map((fav: string) => {
         commands = commands.map(cmd => {
             return {
                 ...cmd,
@@ -48,10 +52,19 @@ onMount(async () => {
             }
         })
     })
+  };
+
+  if (data.activeCommands) {
+    commands = commands.map(cmd => {
+        return {
+            ...cmd,
+            active: data.activeCommands[cmd.name]
+        }
+    })
   }
 });
 
-const { players, category, searchQuery } = $props();
+const { players, category, searchQuery, items } = $props();
 
 let matchingCommands = $state<Command[] | undefined>();
 $effect(() => {
@@ -78,7 +91,7 @@ function setActive(commandName: string) {
     {#each matchingCommands as cmd}
         {#if loadedComponents[cmd.name]}
             <!-- svelte-ignore svelte_component_deprecated -->
-            <svelte:component this={loadedComponents[cmd.name]} {...cmd} setFavorite={setFavorite} players={players} setActive={setActive} />
+            <svelte:component this={loadedComponents[cmd.name]} {...cmd} setFavorite={setFavorite} players={players} setActive={setActive} items={items} />
         {/if}
     {/each}
 </div>

@@ -1,26 +1,27 @@
 import { Vector3 } from '@nativewrappers/fivem';
-import { onClientCallback } from '@overextended/ox_lib/server';
+import { cache } from '@overextended/ox_lib/server';
 import { IsPlayerAllowed } from '../utils';
 import Framework from '../bridge/init';
+import locale from '@common/locale';
 
-onClientCallback('np-admin:bring', async (playerId: any, targetId: number) => {
-  const allowed = IsPlayerAllowed(playerId);
+onNet(`${cache.resource}:bring`, (playerId: number) => {
+  const allowed = IsPlayerAllowed(source);
 
   if (!allowed) return false;
 
-  const target = Framework.getPlayerFromId(targetId);
-  const player = Framework.getPlayerFromId(playerId);
+  const target = Framework.getPlayerFromId(playerId);
+  const player = Framework.getPlayerFromId(source);
+
+  if (!target || !player) return false;
 
   const peds = {
     admin: GetPlayerPed(player.source),
     target: GetPlayerPed(target.source),
   };
 
-  if (!target || !player) return false;
-
   const coords = Vector3.fromArray(GetEntityCoords(peds.admin));
 
   SetEntityCoords(peds.target, coords.x, coords.y, coords.z, true, false, true, false);
 
-  return GetPlayerName(target.source);
-});
+  emitNet(`${cache.resource}:notify`, source, locale('notifications.bring', GetPlayerName(playerId as unknown as string)), 'inform');
+})

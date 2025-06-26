@@ -1,22 +1,9 @@
-import lib, { triggerServerCallback } from '@overextended/ox_lib/client';
-import locale from '@common/locale';
+import { cache } from '@overextended/ox_lib/client';
 
-RegisterNuiCallback('bring', async (player: string, cb: (data: unknown) => void) => {
-  cb(1);
-
+RegisterNuiCallback('bring', async (player: string, cb?: NuiCb) => {
   if (!player) return;
 
-  const response = await triggerServerCallback<string>('np-admin:bring', null, player);
+  emitNet(`${cache.resource}:bring`, player);
 
-  if (response) {
-    lib.notify({
-      description: locale('notifications.bring', response),
-      type: 'inform',
-    });
-  } else {
-    lib.notify({
-      description: locale('something_went_wrong'),
-      type: 'error',
-    });
-  }
+  if (cb) cb(1);
 });

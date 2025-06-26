@@ -1,5 +1,5 @@
 import './commands/index';
-import { cache } from '@overextended/ox_lib/client';
+import lib, { cache } from '@overextended/ox_lib/client';
 import './bridge/init';
 import './favoriteCmd';
 
@@ -17,5 +17,14 @@ onNet(`${cache.resource}:openAdminPanel`, (players: { name: string; id: string; 
 
 RegisterNuiCallback('closeAdminPanel', (_data: null, cb: (data: unknown) => void) => {
   SetNuiFocus(false, false);
-  cb(1);
+  if (cb) cb(1);
 });
+
+export function Notify(content: string, notifyType: 'success' | 'error' | 'inform') {
+  lib.notify({
+     description: content,
+     type: notifyType 
+  })
+};
+
+onNet(`${cache.resource}:notify`, Notify)

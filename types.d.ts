@@ -69,3 +69,5 @@ declare interface SharedObjectServer {
   getItemLabel(item: string): string | undefined;
   getItems(): Record<string, any>;
 };
+
+declare type NuiCb = (value: unknown) => void;

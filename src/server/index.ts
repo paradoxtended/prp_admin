@@ -31,4 +31,4 @@ if (Config.Panel.Command) {
       restricted: Config.Panel.AllowedGroups,
     },
   );
-}
+};

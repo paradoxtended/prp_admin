@@ -9,8 +9,7 @@
 		"web:dev": "cd web && vite dev",
 		"build": "node scripts/build.js",
 		"watch": "node scripts/build.js --watch",
-		"format": "pnpm biome format --write",
-		"parsefavorites": "node --experimental-strip-types --experimental-webstorage --localstorage-file=.cache scripts/favoritesCmd.ts"
+		"format": "pnpm biome format --write"
 	},
 	"keywords": [
 		"fivem"

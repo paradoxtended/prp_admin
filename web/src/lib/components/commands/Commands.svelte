@@ -35,7 +35,6 @@ function setFavorite(name: string, fav: boolean) {
     );
 };
 
-/*
 onMount(async () => {
   const favorites = await fetchNui('getFavoritesCmd');
 
@@ -50,7 +49,6 @@ onMount(async () => {
     })
   }
 });
-*/
 
 const { players, category, searchQuery } = $props();
 

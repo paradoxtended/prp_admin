@@ -1,4 +1,4 @@
-import { onClientCallback } from '@overextended/ox_lib/server';
+import { cache } from '@overextended/ox_lib/server';
 import { mkdir, readFile, writeFile } from 'fs/promises';
 import { existsSync } from 'node:fs';
 import { IsPlayerAllowed } from './utils';
@@ -40,22 +40,24 @@ function FavoriteCommand(playerId: string, commandName: string) {
   WriteFavorites();
 }
 
-onClientCallback('np-admin:toggleFavoriteCmd', async (playerId: any, commandName: string) => {
-  const allowed = IsPlayerAllowed(playerId);
+onNet(`${cache.resource}:toggleFavoriteCmd`, (commandName: string) => {
+  const allowed = IsPlayerAllowed(source);
 
   if (!allowed) return;
 
-  const identifiers = getPlayerIdentifiers(playerId);
+  const identifiers = getPlayerIdentifiers(source);
   const identifier = identifiers.find((id) => id.includes('steam') || id.includes('fivem'));
 
   FavoriteCommand(identifier, commandName);
 });
 
-onClientCallback('np-admin:getFavoritesCmd', async (playerId: any) => {
-  const allowed = IsPlayerAllowed(playerId);
+onNet(`${cache.resource}:getFavoritesCmd`, (): string[] => {
+  const allowed = IsPlayerAllowed(source);
 
-  const identifiers = getPlayerIdentifiers(playerId);
+  if (!allowed) return;
+
+  const identifiers = getPlayerIdentifiers(source);
   const identifier = identifiers.find((id) => id.includes('steam') || id.includes('fivem'));
 
-  return allowed ? favorites[identifier] : null;
+  emitNet(`${cache.resource}:favCommands`, source, favorites[identifier])
 });

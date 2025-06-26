@@ -1,14 +1,20 @@
-import { triggerServerCallback } from '@overextended/ox_lib/client';
+import { cache } from '@overextended/ox_lib/client';
 
-RegisterNuiCallback('toggleFavoriteCmd', async (commandName: string, cb: (data: unknown) => void) => {
-  cb(1);
+let favCommands: string[] | null;
 
-  const response = await triggerServerCallback('np-admin:toggleFavoriteCmd', null, commandName);
+RegisterNuiCallback('toggleFavoriteCmd', async (commandName: string, cb?: NuiCb) => {
+  if (cb) cb(1);
 
-  if (response) {}
+  emitNet(`${cache.resource}:toggleFavoriteCmd`, commandName);
 });
 
-RegisterNuiCallback('getFavoritesCmd', async (_data: unknown, cb: (data: unknown) => void) => {
-  const commands = await triggerServerCallback('np-admin:getFavoritesCmd', null);
-  cb(commands);
+RegisterNuiCallback('getFavoritesCmd', async (_data: unknown, cb: NuiCb) => {
+  emitNet(`${cache.resource}:getFavoritesCmd`);
+  
+  // Delay 50ms, so the favorite commands will get fetched
+  setTimeout(() => cb(favCommands), 50);
+});
+
+onNet(`${cache.resource}:favCommands`, (commands: string[]) => {
+  favCommands = commands;
 });

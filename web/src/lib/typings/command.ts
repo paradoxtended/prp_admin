@@ -7,6 +7,7 @@ export interface Command {
   favorite?: boolean;
   expandable?: boolean;
   boundedTo?: string;
+  active?: boolean;
   setFavorite?: (name: string, status: boolean) => void;
   players?: PlayerAdminData[];
 }

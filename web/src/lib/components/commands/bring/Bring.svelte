@@ -79,7 +79,7 @@ function bringPlayer() {
             --list-empty-color = "#bebebe"
             --list-empty-padding = '10px'
             --item-is-active-bg = 'linear-gradient(#2abea3, #19473fa0)'
-            --list-z-index = '10'
+            --list-z-index = '100'
             --list-max-height = '200px'
         />
         <button onclick={() => bringPlayer()} class="command-button">{label}</button>

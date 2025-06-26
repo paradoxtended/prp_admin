@@ -32,7 +32,8 @@ $bgColorHover: #19473fa0;
     cursor: pointer;
 }
 
-.command .cmd-header:hover {
+.command .cmd-header:hover,
+.command .cmd-active {
     background: linear-gradient($mainColorHover, $bgColor);
 }
 
@@ -71,6 +72,12 @@ $bgColorHover: #19473fa0;
     border-radius: 2px;
     display: flex;
     justify-content: center; align-items: center;
+}
+
+.command .static {
+    background: radial-gradient(#2b2c2ea0, #2b2b31a0);
+    width: 220px;
+    padding: 5px 10px;
 }
 
 .command .command-button {

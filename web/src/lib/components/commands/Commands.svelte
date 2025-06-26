@@ -8,7 +8,8 @@ import { onMount } from 'svelte';
 
 let commands = $state<Command[]>([
     { name: 'bring', label: Locale.bring || 'Bring', category: 'player', expandable: true },
-    { name: 'attach', label: Locale.attach || 'Attach', category: 'player', expandable: true }
+    { name: 'attach', label: Locale.attach || 'Attach', category: 'player', expandable: true },
+    { name: 'cloak', label: Locale.cloak || 'Cloak', category: 'user' }
 ]);
 
 const components = import.meta.glob<{ default: typeof SvelteComponent }>('./**/*.svelte');
@@ -66,13 +67,18 @@ $effect(() => {
     });
 });
 
+function setActive(commandName: string) {
+    commands = commands.map(cmd => 
+        cmd.name === commandName ? {...cmd, active: !cmd.active} : cmd
+    )
+};
 </script>
 
 <div class="commands">
     {#each matchingCommands as cmd}
         {#if loadedComponents[cmd.name]}
             <!-- svelte-ignore svelte_component_deprecated -->
-            <svelte:component this={loadedComponents[cmd.name]} {...cmd} setFavorite={setFavorite} players={players} />
+            <svelte:component this={loadedComponents[cmd.name]} {...cmd} setFavorite={setFavorite} players={players} setActive={setActive} />
         {/if}
     {/each}
 </div>

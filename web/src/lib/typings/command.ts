@@ -13,5 +13,5 @@ export interface Command {
   setFavorite?: (name: string, status: boolean) => void;
   players?: PlayerAdminData[];
   items?: Item[];
-  pedModels?: PedModel[]
+  pedModels?: PedModel[];
 }

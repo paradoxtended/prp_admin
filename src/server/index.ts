@@ -32,6 +32,6 @@ if (Config.Panel.Command) {
       restricted: Config.Panel.AllowedGroups,
     },
   );
-};
+}
 
 onNet(`${cache.resource}:fetchItems`, () => emitNet(`${cache.resource}:fetchItems`, source, Framework.getItems()));

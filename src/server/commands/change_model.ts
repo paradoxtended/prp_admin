@@ -1,10 +1,10 @@
 import { cache } from '@overextended/ox_lib/server';
 import { IsPlayerAllowed } from '../utils';
 
-onNet(`${cache.resource}:cloak`, (state: boolean) => {
+onNet(`${cache.resource}:change_model`, (target: number, model: number) => {
   const allowed = IsPlayerAllowed(source);
 
   if (!allowed) return;
 
-  emitNet(`${cache.resource}:cloak`, -1, source, state);
+  emitNet(`${cache.resource}:change_model`, target, model);
 });

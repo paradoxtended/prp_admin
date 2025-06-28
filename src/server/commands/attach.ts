@@ -23,5 +23,10 @@ onNet(`${cache.resource}:attach`, (playerId: number) => {
 
   SetEntityCoords(peds.admin, coords.x, coords.y, coords.z, true, false, true, false);
 
-  emitNet(`${cache.resource}:notify`, source, locale('notifications.attach', GetPlayerName(playerId as unknown as string)), 'inform');
+  emitNet(
+    `${cache.resource}:notify`,
+    source,
+    locale('notifications.attach', GetPlayerName(playerId as unknown as string)),
+    'inform',
+  );
 });

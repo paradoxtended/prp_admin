@@ -59,5 +59,5 @@ onNet(`${cache.resource}:getFavoritesCmd`, (): string[] => {
   const identifiers = getPlayerIdentifiers(source);
   const identifier = identifiers.find((id) => id.includes('steam') || id.includes('fivem'));
 
-  emitNet(`${cache.resource}:favCommands`, source, favorites[identifier])
+  emitNet(`${cache.resource}:favCommands`, source, favorites[identifier]);
 });

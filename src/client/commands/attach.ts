@@ -5,5 +5,5 @@ RegisterNuiCallback('attach', async (player: string, cb?: NuiCb) => {
 
   emitNet(`${cache.resource}:attach`, player);
 
-  if (cb) cb(1)
+  if (cb) cb(1);
 });

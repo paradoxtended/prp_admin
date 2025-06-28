@@ -8,17 +8,20 @@ import locale from '@common/locale';
 
 let Items: Item[] | null = null;
 
-onNet(`${cache.resource}:openAdminPanel`, (players: { name: string; id: string; steamId: string }[], favoritesCmd: string[]) => {
-  SetNuiFocus(true, true);
+onNet(
+  `${cache.resource}:openAdminPanel`,
+  (players: { name: string; id: string; steamId: string }[], favoritesCmd: string[]) => {
+    SetNuiFocus(true, true);
 
-  SendNUIMessage({
-    action: 'openAdminPanel',
-    data: {
-      players: players,
-      favoritesCmd: favoritesCmd
-    },
-  });
-});
+    SendNUIMessage({
+      action: 'openAdminPanel',
+      data: {
+        players: players,
+        favoritesCmd: favoritesCmd,
+      },
+    });
+  },
+);
 
 RegisterNuiCallback('closeAdminPanel', (_data: null, cb: (data: unknown) => void) => {
   SetNuiFocus(false, false);
@@ -27,10 +30,10 @@ RegisterNuiCallback('closeAdminPanel', (_data: null, cb: (data: unknown) => void
 
 export function Notify(content: string, notifyType: 'success' | 'error' | 'inform') {
   lib.notify({
-     description: content,
-     type: notifyType 
-  })
-};
+    description: content,
+    type: notifyType,
+  });
+}
 
 onNet(`${cache.resource}:notify`, Notify);
 
@@ -41,9 +44,9 @@ RegisterNuiCallback('uiLoaded', (_data: null, cb: NuiCb) => {
     SendNUIMessage({
       action: 'init',
       data: {
-        items: Items
-      }
-    })
+        items: Items,
+      },
+    });
   }, 1000);
 
   Notify(locale('uiLoaded'), 'inform');
@@ -60,10 +63,10 @@ RegisterNuiCallback('initCommands', (_data: null, cb: NuiCb) => {
 
   const data: InitializingData = {
     favorites: favCommands,
-    activeCommands: activeCommands
+    activeCommands: activeCommands,
   };
 
-  setTimeout(() => cb(data), 50)
+  setTimeout(() => cb(data), 50);
 });
 
-onNet(`${cache.resource}:fetchItems`, (items: Item[]) => Items = items);
+onNet(`${cache.resource}:fetchItems`, (items: Item[]) => (Items = items));

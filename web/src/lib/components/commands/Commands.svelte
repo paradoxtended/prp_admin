@@ -11,7 +11,8 @@ let commands = $state<Command[]>([
     { name: 'attach', label: Locale.attach || 'Attach', category: 'player', expandable: true },
     { name: 'cloak', label: Locale.cloak || 'Cloak', category: 'user' },
     { name: 'spawn_item', label: Locale.spawn_item || 'Spawn Item', category: 'utility', expandable: true },
-    { name: 'change_model', label: Locale.change_model || 'Change Model', category: 'utility', expandable: true }
+    { name: 'change_model', label: Locale.change_model || 'Change Model', category: 'utility', expandable: true },
+    { name: 'reset_skin', label: Locale.reset_skin || 'Reset Skin', category: 'utility' }
 ]);
 
 const { players, category, searchQuery, items, pedModels } = $props();

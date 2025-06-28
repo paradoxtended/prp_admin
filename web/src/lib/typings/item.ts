@@ -4,4 +4,4 @@ export interface Item {
   weight: number;
   close: boolean;
   label: string;
-};
+}

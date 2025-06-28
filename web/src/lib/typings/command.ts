@@ -1,4 +1,5 @@
 import { Item } from './item';
+import { PedModel } from './models';
 import { PlayerAdminData } from './player';
 
 export interface Command {
@@ -12,4 +13,5 @@ export interface Command {
   setFavorite?: (name: string, status: boolean) => void;
   players?: PlayerAdminData[];
   items?: Item[];
+  pedModels?: PedModel[]
 }

@@ -10,8 +10,11 @@ let commands = $state<Command[]>([
     { name: 'bring', label: Locale.bring || 'Bring', category: 'player', expandable: true },
     { name: 'attach', label: Locale.attach || 'Attach', category: 'player', expandable: true },
     { name: 'cloak', label: Locale.cloak || 'Cloak', category: 'user' },
-    { name: 'spawn_item', label: Locale.spawn_item || 'Spawn Item', category: 'utility', expandable: true }
+    { name: 'spawn_item', label: Locale.spawn_item || 'Spawn Item', category: 'utility', expandable: true },
+    { name: 'change_model', label: Locale.change_model || 'Change Model', category: 'utility', expandable: true }
 ]);
+
+const { players, category, searchQuery, items, pedModels } = $props();
 
 const components = import.meta.glob<{ default: typeof SvelteComponent }>('./**/*.svelte');
 let loadedComponents = $state<Record<string, any>>({});
@@ -36,7 +39,6 @@ function setFavorite(name: string, fav: boolean) {
       c.name === name ? { ...c, favorite: fav } : c
     );
 };
-
 onMount(async () => {
   const data: {
     favorites: string[];
@@ -64,8 +66,6 @@ onMount(async () => {
   }
 });
 
-const { players, category, searchQuery, items } = $props();
-
 let matchingCommands = $state<Command[] | undefined>();
 $effect(() => {
     matchingCommands = commands.filter(cmd => {
@@ -91,7 +91,7 @@ function setActive(commandName: string) {
     {#each matchingCommands as cmd}
         {#if loadedComponents[cmd.name]}
             <!-- svelte-ignore svelte_component_deprecated -->
-            <svelte:component this={loadedComponents[cmd.name]} {...cmd} setFavorite={setFavorite} players={players} setActive={setActive} items={items} />
+            <svelte:component this={loadedComponents[cmd.name]} {...cmd} setFavorite={setFavorite} players={players} setActive={setActive} items={items} pedModels={pedModels} />
         {/if}
     {/each}
 </div>

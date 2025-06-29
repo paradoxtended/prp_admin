@@ -9,21 +9,24 @@ import { onMount } from 'svelte';
 let commands = $state<Command[]>([
     { name: 'bring', label: Locale.bring || 'Bring', category: 'player', expandable: true },
     { name: 'attach', label: Locale.attach || 'Attach', category: 'player', expandable: true },
+    { name: 'hunger_thirst', label: Locale.hunger_thirst_max || 'Hunger / Thirst Max', category: 'user' },
     { name: 'cloak', label: Locale.cloak || 'Cloak', category: 'user' },
     { name: 'spawn_item', label: Locale.spawn_item || 'Spawn Item', category: 'utility', expandable: true },
     { name: 'change_model', label: Locale.change_model || 'Change Model', category: 'utility', expandable: true },
-    { name: 'reset_skin', label: Locale.reset_skin || 'Reset Skin', category: 'utility' }
+    { name: 'reset_skin', label: Locale.reset_skin || 'Reset Skin', category: 'utility' },
+    { name: 'fix_vehicle', label: Locale.fix_vehicle || 'Fix Vehicle', category: 'utility' },
+    { name: 'noclip', label: Locale.noclip || 'Noclip', category: 'user' }
 ]);
 
 const { players, category, searchQuery, items, pedModels } = $props();
 
-const components = import.meta.glob<{ default: typeof SvelteComponent }>('./**/*.svelte');
+const components = import.meta.glob<{ default: typeof SvelteComponent }>('./**/*.svelte', { eager: true });
 let loadedComponents = $state<Record<string, any>>({});
 
 async function loadComponents(name: string) {
     const path = `./${name}/${name[0].toUpperCase() + name.slice(1)}.svelte`;
     if (components[path] && !loadedComponents[name]) {
-        loadedComponents[name] = (await components[path]()).default;
+        loadedComponents[name] = components[path].default;
     }
 };
 

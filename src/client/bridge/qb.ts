@@ -52,4 +52,26 @@ if (GetResourceState('qb-core') === 'started') {
     const data = sharedObject.Functions.GetPlayerData();
     return `${data?.charinfo?.firstname || ''} ${data?.charinfo?.lastname || ''}`.trim();
   };
+
+  Framework.getStatus = (type: 'hunger' | 'thirst') => {
+    const playerState = sharedObject.Functions.GetPlayerData();
+    // compatibility for ESX-style status (0-10000)
+    return playerState.Functions.GetMetaData(type) * 10000;
+  };
+
+  Framework.setStatus = (values: Record<'hunger' | 'thirst', number>) => {
+    const playerState = sharedObject.Functions.GetPlayerData();
+
+    for (const [name, rawValue] of Object.entries(values) as ['hunger' | 'thirst', number][]) {
+        let value = rawValue;
+
+        // scale down if using ESX-style large numbers
+        if (value > 100 || value < -100) {
+            value *= 0.0001;
+        }
+
+        const current = playerState.Functions.GetMetaData(name);
+        playerState.Functions.SetMetaData(name, current + value);
+    }
+  };
 }

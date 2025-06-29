@@ -7,18 +7,9 @@ import { fetchNui } from '$lib/utils/fetchNui';
 import { isEnvBrowser } from '$lib/utils/misc';
 import { slide } from 'svelte/transition';
 
-const { name, label, favorite, expandable, boundedTo, setFavorite, players }: Command = $props();
+const { name, label, favorite, setFavorite, players }: Command = $props();
 
 let expanded = $state(false);
-let allowOverflow = $state(false);
-
-$effect(() => {
-    if (expanded) {
-        setTimeout(() => allowOverflow = true, 300);
-    } else {
-        allowOverflow = false;
-    }
-});
 
 let selectedPlayer = $state(null);
 
@@ -40,7 +31,7 @@ function bringPlayer() {
 };
 </script>
 
-<div class="command" style={`${allowOverflow && 'overflow: visible'}`}>
+<div class="command">
     <div class="cmd-header" onclick={() => expanded = !expanded}>
         <div class="leftSide">
             <i class="fa-solid fa-star" style={`opacity: ${favorite ? 1 : 0.4}`}

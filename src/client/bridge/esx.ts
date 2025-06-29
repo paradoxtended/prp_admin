@@ -31,6 +31,24 @@ if (GetResourceState('es_extended') === 'started') {
 
   Framework.getInventory = () => sharedObject?.GetPlayerData().inventory || [];
 
+  Framework.getStatus = async (type: 'hunger' | 'thirst') => {
+    return new Promise((resolve) => {
+        emit('esx_status:getStatus', name, (status: { val: number }) => {
+            resolve(status.val);
+        });
+    });
+  };
+
+  Framework.setStatus = (values: Record<'hunger' | 'thirst', number>) => {
+    for (const [name, value] of Object.entries(values) as ['hunger' | 'thirst', number][]) {
+        if (value > 0) {
+            emit('esx_status:add', name, value);
+        } else {
+            emit('esx_status:remove', name, -value);
+        }
+    }
+  };
+
   // Sync PlayerData event
   on('esx:setPlayerData', (key: string, val: any) => {
     if (GetInvokingResource() === 'es_extended' && sharedObject) {

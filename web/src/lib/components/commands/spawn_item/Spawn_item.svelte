@@ -121,9 +121,9 @@ function spawnItem() {
                 --list-max-height = '200px'
             />
             <p class="command-label">{Locale.amount || 'Amount'}</p>
-            <input type="number" placeholder={Locale.search || 'Search'} oninput={(e: Event) => data.amount = (e.target as HTMLInputElement).value}>
+            <input type="number" class="command-input" placeholder={Locale.search || 'Search'} oninput={(e: Event) => data.amount = (e.target as HTMLInputElement).value}>
             <p class="command-label">{Locale.json || 'Json'}</p>
-            <input type="text" placeholder={Locale.search || 'Search'} oninput={(e: Event) => data.json = (e.target as HTMLInputElement).value}>
+            <input type="text" class="command-input" placeholder={Locale.search || 'Search'} oninput={(e: Event) => data.json = (e.target as HTMLInputElement).value}>
             <button onclick={() => spawnItem()} class="command-button">{label}</button>
         </div>
     {/if}

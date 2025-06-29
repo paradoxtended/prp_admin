@@ -1,8 +1,8 @@
-import './commands/index';
+import './commands/init';
 import lib, { cache } from '@overextended/ox_lib/client';
 import './bridge/init';
 import './favoriteCmd';
-import { cloaked } from './commands/index';
+import { cloaked, noclipActive } from './commands/init';
 import { favCommands } from './favoriteCmd';
 import locale from '@common/locale';
 
@@ -60,6 +60,7 @@ RegisterNuiCallback('initCommands', (_data: null, cb: NuiCb) => {
   const activeCommands: Record<string, boolean> = {};
 
   activeCommands.cloak = cloaked;
+  activeCommands.noclip = noclipActive;
 
   const data: InitializingData = {
     favorites: favCommands,

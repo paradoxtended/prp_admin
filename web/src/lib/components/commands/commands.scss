@@ -111,7 +111,7 @@ $bgColorHover: #19473fa0;
     font-size: 12px;
 }
 
-.command-main input {
+.command-main .command-input {
     background: radial-gradient(#71717a, #52525b);
     border: 1px solid #656a74;
     color: #bebebe;
@@ -121,6 +121,6 @@ $bgColorHover: #19473fa0;
     padding: 5px 10px;
 }
 
-.command-main input::placeholder {
+.command-main .command-input::placeholder {
     color: #bebebe;
 }

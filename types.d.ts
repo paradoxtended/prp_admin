@@ -28,6 +28,8 @@ declare interface SharedObjectClient {
   getIdentifier(): string;
   getCharacterName(): string;
   getInventory(): any[]; // todo find out what is this returning
+  getStatus(type: 'hunger' | 'thirst'): Promise<number> | number;
+  setStatus(values: Record<'hunger' | 'thirst', number>): void;
 };
 
 declare interface PlayerDataServer {
